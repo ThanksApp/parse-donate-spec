@@ -1,6 +1,6 @@
 {
   "name": "parse-donate-spec",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A parser for the open source donation spec",
   "main": "index.js",
   "repository": "https://github.com/ThanksApp/donate-spec",

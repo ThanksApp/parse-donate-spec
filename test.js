@@ -8,7 +8,6 @@ const it = global.it
 describe('parse()', () => {
   it('parses simple specs!', () => {
     const parsed = parse('givethanks.app/u/bobloblaw')
-    console.log({ parsed: parsed[0].platforms })
     expect(Array.isArray(parsed)).to.equal(true)
     expect(parsed[0]).to.be.a('object')
     expect(Array.isArray(parsed[0].platforms))
@@ -94,5 +93,27 @@ describe('parse()', () => {
     expect(parsed[0].platforms.length, 'reply[0].platforms.length').to.equal(1)
     expect(parsed[1].platforms.length, 'reply[1].platforms.length').to.equal(2)
     expect(parsed[1].email, 'reply[1].email').to.equal(emailTest)
+  })
+
+  it('normalizes sum of weights to equal 1!', () => {
+    const parsed = parse({
+      recipients: [
+        {
+          weight: 3.14,
+          name: 'pi',
+          platform: 'fooPi',
+          address: 'barPi'
+        },
+        {
+          weight: 2.72,
+          name: 'e',
+          platform: 'fooE',
+          address: 'barE'
+        }
+      ]
+    })
+
+    expect(Array.isArray(parsed)).to.equal(true)
+    expect(parsed[0].weight + parsed[1].weight).to.equal(1)
   })
 })

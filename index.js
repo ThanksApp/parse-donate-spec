@@ -166,7 +166,7 @@ module.exports = function parse(data /*: any */) /*: specRecipientsType  */ {
       .filter(recipient => recipient !== null)
 
     //Normalize weights
-    const totalWeight = recipients.reduce((total, recipient) => total + recipient.weight)
+    const totalWeight = recipients.reduce((total, { weight }) => total + weight, 0)
     recipients.forEach(recipient => (recipient.weight = recipient.weight / totalWeight))
     return recipients
   }
