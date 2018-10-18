@@ -5,24 +5,24 @@ const URL = require('url').URL
 type simple = string
 
 type explicit = {
-  platform: string,
-  address: string,
   name?: string,
   email?: string,
   weight?: number,
-  tier_currency?: string,
+  platform: string,
+  address: string,
+  tierCurrency?: string,
   tiers?: Array<rewardTier>
 }
 
 type explicitMultiPlatform = {
+  name?: string,
+  email?: string,
+  weight?: number,
   platforms: Array<{
     platform: string,
     address: string
   }>,
-  name?: string,
-  email?: string,
-  weight?: number,
-  tier_currency?: string,
+  tierCurrency?: string,
   tiers?: Array<rewardTiers>
 }
 
