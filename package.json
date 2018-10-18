@@ -1,6 +1,6 @@
 {
   "name": "parse-donate-spec",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A parser for the open source donation spec",
   "main": "index.js",
   "repository": "https://github.com/ThanksApp/donate-spec",
@@ -10,7 +10,43 @@
     "test": "./node_modules/.bin/mocha test"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "chai": "^4.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "donate": {
+    "recipients": [
+      {
+        "name": "Dan Pastusek",
+        "weight": 5,
+        "platforms": [
+          {
+            "platform": "Thanks",
+            "address": "https://givethanks.app/u/pastudan"
+          },
+          {
+            "platform": "Bitcoin",
+            "address": "3NDMuYoi1hXAfrv3Dr4RPZKRivQuoAXEa2"
+          },
+          {
+            "platform": "Ethereum",
+            "address": "0x13Ab0e1589c38b97C37Bd636808192426Da60310"
+          },
+          {
+            "platform": "Nano",
+            "address": "xrb_3n9zhn4disxceixnsr4q74sio5b9qdgzq6oddb9og6cn6x876qmhy8t9i51m"
+          },
+          {
+            "platform": "PayPal",
+            "address": "https://paypal.me/pastudan"
+          }
+        ]
+      },
+      {
+        "name": "Seandon Mooy",
+        "weight": 5,
+        "platform": "Thanks",
+        "address": "https://givethanks.app/u/erulabs"
+      }
+    ]
   }
 }
