@@ -63,7 +63,14 @@ function parsePlatformFromString(string) {
   } catch (err) {}
 }
 
-module.exports = function parse(data /*: any */) /*: specRecipientsType  */ {
+module.exports = function parse(data /*: any */) /*: Object  */ {
+  return {
+    recipients: getRecipients(data),
+    reward: data.reward
+  }
+}
+
+function getRecipients(data /*: any */) /*: Object  */ {
   // Handle "simple" type
   if (typeof data === 'string') {
     const platform = parsePlatformFromString(data)

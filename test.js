@@ -8,10 +8,10 @@ const it = global.it
 describe('parse()', () => {
   it('parses simple specs!', () => {
     const parsed = parse('givethanks.app/u/bobloblaw')
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0]).to.be.a('object')
-    expect(Array.isArray(parsed[0].platforms))
-    expect(parsed[0].platforms.length, 'platforms.length').to.equal(1)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0]).to.be.a('object')
+    expect(Array.isArray(parsed.recipients[0].platforms))
+    expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
   it('parses explicit specs!', () => {
@@ -19,10 +19,10 @@ describe('parse()', () => {
       platform: 'foo',
       address: 'bar'
     })
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0]).to.be.a('object')
-    expect(Array.isArray(parsed[0].platforms))
-    expect(parsed[0].platforms.length, 'platforms.length').to.equal(1)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0]).to.be.a('object')
+    expect(Array.isArray(parsed.recipients[0].platforms))
+    expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
   it('parses explicitMultiPlatform specs!', () => {
@@ -34,10 +34,10 @@ describe('parse()', () => {
         }
       ]
     })
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0]).to.be.a('object')
-    expect(Array.isArray(parsed[0].platforms))
-    expect(parsed[0].platforms.length, 'platforms.length').to.equal(1)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0]).to.be.a('object')
+    expect(Array.isArray(parsed.recipients[0].platforms))
+    expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
   it('parses invalid spec (containing platforms & recipients)!', () => {
@@ -55,16 +55,16 @@ describe('parse()', () => {
         }
       ]
     })
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0]).to.be.a('object')
-    expect(Array.isArray(parsed[0].platforms))
-    expect(parsed[0].platforms.length, 'platforms.length').to.equal(1)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0]).to.be.a('object')
+    expect(Array.isArray(parsed.recipients[0].platforms))
+    expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
   it('parses invalid spec (number)!', () => {
     const parsed = parse(25)
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed.length).to.equal(0)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients.length).to.equal(0)
   })
 
   it('parses multiRecipient specs!', () => {
@@ -87,12 +87,12 @@ describe('parse()', () => {
         }
       ]
     })
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0]).to.be.a('object')
-    expect(Array.isArray(parsed[0].platforms))
-    expect(parsed[0].platforms.length, 'reply[0].platforms.length').to.equal(1)
-    expect(parsed[1].platforms.length, 'reply[1].platforms.length').to.equal(2)
-    expect(parsed[1].email, 'reply[1].email').to.equal(emailTest)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0]).to.be.a('object')
+    expect(Array.isArray(parsed.recipients[0].platforms))
+    expect(parsed.recipients[0].platforms.length, 'reply[0].platforms.length').to.equal(1)
+    expect(parsed.recipients[1].platforms.length, 'reply[1].platforms.length').to.equal(2)
+    expect(parsed.recipients[1].email, 'reply[1].email').to.equal(emailTest)
   })
 
   it('normalizes sum of weights to equal 1!', () => {
@@ -113,7 +113,7 @@ describe('parse()', () => {
       ]
     })
 
-    expect(Array.isArray(parsed)).to.equal(true)
-    expect(parsed[0].weight + parsed[1].weight).to.equal(1)
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients[0].weight + parsed.recipients[1].weight).to.equal(1)
   })
 })
