@@ -63,13 +63,6 @@ function parsePlatformFromString(string) {
   } catch (err) {}
 }
 
-module.exports = function parse(data /*: any */) /*: Object  */ {
-  return {
-    recipients: getRecipients(data),
-    reward: data.reward
-  }
-}
-
 function getRecipients(data /*: any */) /*: Object  */ {
   // Handle "simple" type
   if (typeof data === 'string') {
@@ -180,4 +173,11 @@ function getRecipients(data /*: any */) /*: Object  */ {
 
   // Spec was invalid
   return []
+}
+
+module.exports = function parse(data /*: any */) /*: Object  */ {
+  return {
+    recipients: getRecipients(data),
+    reward: data && data.reward
+  }
 }
