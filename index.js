@@ -78,7 +78,7 @@ module.exports = function parse(data /*: any */) /*: specRecipientsType  */ {
     ]
   }
 
-  if (typeof data !== 'object') return []
+  if (data === null || typeof data !== 'object') return []
 
   // Handle "explicit" type
   if (typeof data.platform === 'string' && typeof data.address === 'string') {
