@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "A parser for the open source donation spec",
   "main": "index.js",
-  "repository": "https://github.com/ThanksApp/donate-spec",
+  "repository": "https://github.com/ThanksApp/parse-donate-spec",
   "author": "Dan Pastusek",
   "license": "MIT",
   "scripts": {
