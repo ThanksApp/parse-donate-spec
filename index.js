@@ -129,7 +129,12 @@ function getRecipients(data /*: any */) /*: Object  */ {
           ]
         }
 
-        const weight = recipient.weight ? parseFloat(recipient.weight) : 1
+        const weight = typeof recipient.weight !== 'undefined' ? parseFloat(recipient.weight) : 1
+
+        // Disallow NaN, Infinity, and negative weights
+        if (Number.isNaN(weight) || weight === Infinity || weight <= 0) {
+          return null
+        }
 
         // Recipient has only a single platform
         if (filterValidPlatform(recipient)) {

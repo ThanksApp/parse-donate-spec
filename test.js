@@ -6,7 +6,7 @@ const describe = global.describe
 const it = global.it
 
 describe('parse()', () => {
-  it('parses simple specs!', () => {
+  it('parses simple specs', () => {
     const parsed = parse('givethanks.app/u/bobloblaw')
     expect(Array.isArray(parsed.recipients)).to.equal(true)
     expect(parsed.recipients[0]).to.be.a('object')
@@ -14,7 +14,7 @@ describe('parse()', () => {
     expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
-  it('parses explicit specs!', () => {
+  it('parses explicit specs', () => {
     const parsed = parse({
       platform: 'foo',
       address: 'bar'
@@ -25,7 +25,7 @@ describe('parse()', () => {
     expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
-  it('parses explicitMultiPlatform specs!', () => {
+  it('parses explicitMultiPlatform specs', () => {
     const parsed = parse({
       platforms: [
         {
@@ -40,7 +40,7 @@ describe('parse()', () => {
     expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
-  it('parses invalid spec (containing platforms & recipients)!', () => {
+  it('parses invalid spec (containing platforms & recipients)', () => {
     const parsed = parse({
       platforms: [
         {
@@ -61,13 +61,13 @@ describe('parse()', () => {
     expect(parsed.recipients[0].platforms.length, 'platforms.length').to.equal(1)
   })
 
-  it('parses invalid spec (number)!', () => {
+  it('parses invalid spec (number)', () => {
     const parsed = parse(25)
     expect(Array.isArray(parsed.recipients)).to.equal(true)
     expect(parsed.recipients.length).to.equal(0)
   })
 
-  it('parses multiRecipient specs!', () => {
+  it('parses multiRecipient specs', () => {
     const emailTest = 'multi-recp-email@gmail.com'
     const parsed = parse({
       recipients: [
@@ -95,7 +95,7 @@ describe('parse()', () => {
     expect(parsed.recipients[1].email, 'reply[1].email').to.equal(emailTest)
   })
 
-  it('normalizes sum of weights to equal 1!', () => {
+  it('normalizes sum of weights to equal 1', () => {
     const parsed = parse({
       recipients: [
         {
@@ -115,5 +115,47 @@ describe('parse()', () => {
 
     expect(Array.isArray(parsed.recipients)).to.equal(true)
     expect(parsed.recipients[0].weight + parsed.recipients[1].weight).to.equal(1)
+  })
+
+  it('removes recipients with invalid weights', () => {
+    const parsed = parse({
+      recipients: [
+        {
+          weight: NaN,
+          name: 'NaN',
+          platform: 'foo',
+          address: 'bar'
+        },
+        {
+          weight: Infinity,
+          name: 'Infinity',
+          platform: 'foo',
+          address: 'bar'
+        },
+        {
+          weight: 'bold',
+          name: 'string (bold)',
+          platform: 'foo',
+          address: 'bar'
+        },
+        {
+          weight: -50,
+          name: '-50',
+          platform: 'foo',
+          address: 'bar'
+        },
+        {
+          weight: 50,
+          name: '50',
+          platform: 'foo',
+          address: 'bar'
+        }
+      ]
+    })
+
+    expect(Array.isArray(parsed.recipients)).to.equal(true)
+    expect(parsed.recipients.length).to.equal(1)
+    expect(parsed.recipients[0].name).to.equal('50') // Expected to keep the only positive weight (50)
+    expect(parsed.recipients[0].weight).to.equal(1) //normalized weight
   })
 })
